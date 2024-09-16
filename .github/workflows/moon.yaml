@@ -12,4 +12,4 @@ jobs:
       - name : curl
         uses: enflo/curl-action@master
         with:
-          curl: {{-x GET https://wttr.in/Moon}}
+          curl: "-x GET https://wttr.in/Moon"
