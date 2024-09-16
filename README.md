@@ -1,4 +1,4 @@
-![Nathan gros bg](https://github.com/Nathan-Toigo/DevOps_TD2/actions/workflows/moon/badge.svg)
+![Nathan gros bg](https://github.com/Nathan-Toigo/DevOps_TD2/actions/workflows/moon.yaml/badge.svg)
 # DevOps_TD2
 
 - Nathan TOIGO et Arno BIDET
