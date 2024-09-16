@@ -6,7 +6,10 @@ on:
 run-name: Boutton Appuyé 
 
 jobs:
-  simple-job:
+  curl:
     runs-on: ubuntu-latest
     steps:
-      - run: curl -x GET https://wttr.in/Moon
+      - name : curl
+        uses: enflo/curl-action@master
+        with:
+          curl: {{-x GET https://wttr.in/Moon}}
