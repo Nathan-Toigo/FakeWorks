@@ -1,0 +1,84 @@
+.arrow-container{
+    position: relative;
+    width: 182px;
+    height: 182px;
+    aspect-ratio: 1/1;
+    .arrow{
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        background-color: #E9E9E9;
+        &#left{
+            width: 63px;
+            height: 54px; 
+            left : 0;
+            top: 63px;
+            border-left: 1px solid #000000;
+            border-bottom: 1px solid #000000;
+            border-top: 1px solid #000000;
+            border-radius: 26px 0 0 26px;
+            img{
+                transform: rotate(90deg);
+            }
+        }
+        
+        &#right{
+            width: 63px;
+            height: 54px; 
+            left: 118px;
+            top: 63px;
+            border-right: 1px solid #000000;
+            border-bottom: 1px solid #000000;
+            border-top: 1px solid #000000;
+            border-radius: 0 26px 26px 0;
+            img{
+                transform: rotate(270deg);
+            }
+        }
+        
+        &#up{
+            width: 54px;
+            height: 63px; 
+            top : 0;
+            left: 63px;
+            border-left: 1px solid #000000;
+            border-right: 1px solid #000000;
+            border-top: 1px solid #000000;
+            border-radius: 26px 26px 0 0;
+            img{
+                transform: rotate(180deg);
+            }
+        }
+        
+        &#down{
+            width: 54px;
+            height: 63px; 
+            top:  118px;
+            left: 63px;
+            border-left: 1px solid #000000;
+            border-right: 1px solid #000000;
+            border-bottom: 1px solid #000000;
+            border-radius: 0 0 26px 26px;
+            img{
+                transform: rotate(0deg);
+            }
+        }
+        &#center{
+            width: 54px;
+            height: 54px; 
+            top: 63px;
+            left: 63px;
+        }
+
+        img{
+            width: 30px;
+            height: 30px;
+        }
+    }
+    
+    
+
+}
+
