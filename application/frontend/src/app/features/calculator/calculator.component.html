@@ -1,6 +1,6 @@
 <h1>{{title}}</h1>
 <div class="components-container">
     <app-screen [messages]="messages" [currentMessage]="currentMessage"></app-screen>
-    <app-control></app-control>
+    <app-control (onKeyClick)="onKeyClickHandler($event)"></app-control>
     <app-numpad (onKeyClick)="onKeyClickHandler($event)"></app-numpad>
 </div>

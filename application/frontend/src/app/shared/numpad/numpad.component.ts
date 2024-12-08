@@ -33,8 +33,8 @@ export class NumpadComponent {
     { value: 'EXE', type: 'exec' }
   ]
 
-  onKeyClickHandler(value: string) {
-    this.onKeyClick.emit(this.keys.find(key => key.value === value));
+  onKeyClickHandler(value: { value: string, type: string }) {
+    this.onKeyClick.emit(value);
   }
 
 }
