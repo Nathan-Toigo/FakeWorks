@@ -1,15 +1,33 @@
 <div class="arrow-container">
-    <div class="arrow" id="left">
-        <img src="/assets/arrow.svg" alt="">
-    </div>
-    <div class="arrow" id="up">
-        <img src="/assets/arrow.svg" alt="">
-    </div>
-    <div class="arrow" id="center"></div>
-    <div class="arrow" id="right">
-        <img src="/assets/arrow.svg" alt="">
-    </div>
-    <div class="arrow" id="down">
-        <img src="/assets/arrow.svg" alt="">
-    </div>
+  <div class="arrow" id="left">
+    <img src="/assets/arrow.svg" alt="" />
+  </div>
+  <div class="arrow" id="up">
+    <img src="/assets/arrow.svg" alt="" />
+  </div>
+  <div class="arrow" id="center"></div>
+  <div class="arrow" id="right">
+    <img src="/assets/arrow.svg" alt="" />
+  </div>
+  <div class="arrow" id="down">
+    <img src="/assets/arrow.svg" alt="" />
+  </div>
+</div>
+<div class="general-container">
+  <app-button [bgColor]="'#EFBB58'">
+    <img height="38px" width="34px" src="/assets/home.svg" alt="" />
+  </app-button>
+
+  <app-button [bgColor]="'#363636'">
+    <img height="38px" width="34px" src="/assets/on_off.svg" alt="" />
+  </app-button>
+</div>
+<div class="validation-container">
+  <app-button [isRound]="true">
+    OK
+  </app-button>
+
+  <app-button [isRound]="true">
+    <img height="38px" width="34px" src="/assets/back_arrow.svg" alt="" />
+  </app-button>
 </div>
