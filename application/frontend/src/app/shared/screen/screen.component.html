@@ -1,6 +1,6 @@
 <div class="screen">
   @for(message of messages; track message){
-  <span [class.text]="message.type == 'text'" [class.strange-text]="message.type == 'strange_text'">
+  <span [class.text]="message.type == 'text'" [class.error-text]="message.type == 'error'" [class.strange-text]="message.type == 'strange_text'">
     {{ message.message }}
   </span>
   }

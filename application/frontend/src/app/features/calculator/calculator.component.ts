@@ -38,9 +38,22 @@ const ok_messages = [
   "OK is just false hope.",
   "You think it's OK? Wrong.",
   "OK, but not for you."
-]
+];
 
-
+const parenthesis_messages = [
+  "Parentheses enclose despair.",
+  "Inside these, nothing's safe.",
+  "Syntax error—too open.",
+  "Closed, but not forgotten.",
+  "Parentheses trap the void."
+];
+const decimal_messages = [
+  "Precision won't save you.",
+  "A point of no return.",
+  "Decimals divide us all.",
+  "Small, but significant pain.",
+  "Numbers never lie, but do."
+];
 
 
 @Component({
@@ -59,8 +72,12 @@ export class CalculatorComponent {
   onKeyClickHandler({ value, type }: { value: string, type: string }) {
 
     if (type === "calculation") {
-      this.currentMessage += value;
-      this.currentIndex = this.currentMessage.length;
+      if (!/^\d*([\+\-\/x](\d*)?)?$/.test(this.currentMessage + value)) {
+        this.messages.push({ message: "ERR : -> format int[+-x/]int", type: "error" });
+      } else {
+        this.currentMessage += value;
+        this.currentIndex = this.currentMessage.length;
+      }
     } else if (type === "exec" && this.currentMessage) {
       this.messages.push({ message: this.currentMessage, type: "calculation" });
       this.currentMessage = '';
@@ -77,6 +94,8 @@ export class CalculatorComponent {
       if (type === "on_off") messages = on_off_messages;
       if (type === "return") messages = return_messages;
       if (type === "ok") messages = ok_messages;
+      if (type === "parenthesis") messages = parenthesis_messages;
+      if (type === "decimal") messages = decimal_messages;
       this.messages.push({ message: messages[Math.floor(Math.random() * messages.length)], type: "strange_text" });
     }
   }

@@ -35,8 +35,13 @@
                 color: #efbb58;
             }
 
-            &.strange-text {
+            
+            &.error-text {
                 color: #FF0000;
+            }
+
+            &.strange-text {
+                color: #ae00ff;
             }
 
             &.current-message {
