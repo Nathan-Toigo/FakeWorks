@@ -20,3 +20,11 @@ app-root{
     align-items: center;
     display: flex;
 }
+
+/** remove default styling for buttons */
+button{
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+}
