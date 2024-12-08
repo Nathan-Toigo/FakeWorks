@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
@@ -9,27 +9,32 @@ import { ButtonComponent } from '../button/button.component';
   styleUrl: './numpad.component.scss'
 })
 export class NumpadComponent {
+  @Output() onKeyClick = new EventEmitter<{ value: string, type: string }>();
   keys = [
-    { value: "7", type: 'number' },
-    { value: "8", type: 'number' },
-    { value: "9", type: 'number' },
-    { value: "(", type: 'parenthesis' },
-    { value: ")", type: 'parenthesis' },
-    { value: "4", type: 'number' },
-    { value: "5", type: 'number' },
-    { value: "6", type: 'number' },
-    { value: "x", type: 'operator' },
-    { value: "/", type: 'operator' },
-    { value: "1", type: 'number' },
-    { value: "2", type: 'number' },
-    { value: "3", type: 'number' },
-    { value: "+", type: 'operator' },
-    { value: "-", type: 'operator' },
-    { value: "0", type: 'number' },
-    { value: '.', type: 'decimal' },
-    { value: '', type: 'null' },
-    { value: '', type: 'null' },
+    { value: "7", type: 'calculation' },
+    { value: "8", type: 'calculation' },
+    { value: "9", type: 'calculation' },
+    { value: "(", type: 'calculation' },
+    { value: ")", type: 'calculation' },
+    { value: "4", type: 'calculation' },
+    { value: "5", type: 'calculation' },
+    { value: "6", type: 'calculation' },
+    { value: "x", type: 'calculation' },
+    { value: "/", type: 'calculation' },
+    { value: "1", type: 'calculation' },
+    { value: "2", type: 'calculation' },
+    { value: "3", type: 'calculation' },
+    { value: "+", type: 'calculation' },
+    { value: "-", type: 'calculation' },
+    { value: "0", type: 'calculation' },
+    { value: '.', type: 'calculation' },
+    { value: 'CLR', type: 'clear' },
+    { value: 'DEL', type: 'delete' },
     { value: 'EXE', type: 'exec' }
   ]
+
+  onKeyClickHandler(value: string) {
+    this.onKeyClick.emit(this.keys.find(key => key.value === value));
+  }
 
 }

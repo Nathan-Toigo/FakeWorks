@@ -1,3 +1,11 @@
 <div class="screen">
-    
+  @for(message of messages; track message){
+  <span [class.text]="message.type == 'text'">
+    {{ message.message }}
+  </span>
+  }
+  <span>
+    {{ currentMessage }}
+    @if(!currentMessage.length){ &nbsp; }
+  </span>
 </div>

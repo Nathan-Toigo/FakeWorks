@@ -10,5 +10,27 @@
         aspect-ratio: 1034 / 776;
         border-radius: 4px;
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content :flex-end;
+        padding: 20px;
+        box-sizing: border-box;
+        gap: 15px;
+        overflow-y: hidden;
+        span{
+            color: #FFFFFF;
+            font-size: 24px;
+            line-height: 29px;
+            text-align: right;
+            display: block;
+            font-family: 'Courier New', Courier, monospace;
+            .cursor{
+                animation: blink 1s infinite;
+                background-color: #FFFFFF;
+            }
+            &.text{
+                color: #efbb58;
+            }
+        }
     }
 }
