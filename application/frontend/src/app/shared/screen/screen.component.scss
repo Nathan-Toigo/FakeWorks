@@ -46,15 +46,14 @@
                 &::after {
                     content: "";
                     position: absolute;
-                    top: 0;
-                    right: 0;
+                    top: 4px;
+                    right: -1px;
                     display: inline-block;
-                    background-color: #FFFFFFEF;
+                    background-color: #FFFFFF88;
                     vertical-align: top;
-                    width: 14.41px;
-                    height: 24px;
-                    -webkit-animation: blink 1s step-end infinite;
-                    animation: blink 1s step-end infinite;
+                    width: 2px;
+                    height: 20px;
+                    animation: blink 2s step-end infinite;
                 }
             }
         }
