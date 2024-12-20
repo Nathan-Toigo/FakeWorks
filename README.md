@@ -1,9 +1,13 @@
-# DevOps_TD2
+# EXAMEN PRATIQUE - ILIA-SQR - Virtualisation & Cloud Computing
 
 - Nathan TOIGO et Arno BIDET
 - ILIA
 - Compte GitHub de Nathan : https://github.com/Nathan-Toigo
 - Compte Github de Arno : https://github.com/ArnoBidet
-- ![image](https://github.com/user-attachments/assets/5ac48214-ae67-402c-9545-e5bde6fe09a7)
 
-## Statuts actions
+
+Sommaire
+---
+* [Fondation](foundation/README.md)
+* [Kubernetes](application/README.md)
+* [Application](kubernetes/README.md)

@@ -1,0 +1,35 @@
+services:
+  frontend:
+    container_name: td_contenerisation_frontend
+    build: 
+      context: ./
+      dockerfile: Dockerfile.ngix
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+    environment:
+      - API_URL='localhost:5000'
+
+  api:
+    container_name: td_contenerisation_api
+    build: 
+      context: ./
+      dockerfile: Dockerfile.flask
+    ports:
+      - "8081:80"
+    volumes:
+      - ./backend:/app
+    environment:
+      - REDIS_URL='localhost'
+      - REDIS_PORT='6379'
+  
+  redisdb:
+    container_name: td_contenerisation_redis
+    image: redis
+    ports:
+      - "6379:6379"
+
+
+networks:
+  myapp-network: {}
