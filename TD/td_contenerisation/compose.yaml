@@ -1,6 +1,9 @@
 services:
   frontend:
-    image: nginx:alpine
+    container_name: td_contenerisation_frontend
+    build: 
+      context: ./
+      dockerfile: Dockerfile.ngix
     ports:
       - "8080:80"
     volumes:
@@ -9,6 +12,7 @@ services:
       - API_URL='localhost:5000'
 
   api:
+    container_name: td_contenerisation_api
     build: 
       context: ./
       dockerfile: Dockerfile.flask
@@ -21,6 +25,7 @@ services:
       - REDIS_PORT='6379'
   
   redisdb:
+    container_name: td_contenerisation_redis
     image: redis
     ports:
       - "6379:6379"
