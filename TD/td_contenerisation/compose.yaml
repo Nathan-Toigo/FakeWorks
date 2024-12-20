@@ -1,0 +1,30 @@
+services:
+  frontend:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+    environment:
+      - API_URL='localhost:5000'
+
+  api:
+    build: 
+      context: ./
+      dockerfile: Dockerfile.flask
+    ports:
+      - "8081:80"
+    volumes:
+      - ./backend:/app
+    environment:
+      - REDIS_URL='localhost'
+      - REDIS_PORT='6379'
+  
+  redisdb:
+    image: redis
+    ports:
+      - "6379:6379"
+
+
+networks:
+  myapp-network: {}
