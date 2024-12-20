@@ -1,9 +1,11 @@
-FROM python
+FROM python:latest
 
 COPY . /app
 
 WORKDIR /app
 
+RUN apt update
+RUN pip install --upgrade pip
 RUN pip install Flask
 
 CMD ["python", "api.py"]

@@ -5,3 +5,21 @@ services:
       dockerfile: Dockerfile
     ports:
       - "80:80"
+  redis:
+    image: "redis:alpine"
+  rabbitMQ:
+    image: "rabbitmq"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./backend:/app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - redis
+      # - rabbitMQ
