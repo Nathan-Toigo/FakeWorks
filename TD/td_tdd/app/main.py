@@ -1,1 +1,2 @@
-print("baba")
+def hello(msg="Hello World !"):
+    return msg
