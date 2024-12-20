@@ -21,4 +21,4 @@ jobs:
           pip install pytest
 
       - name: Run tests
-        run: python td_tdd/app/test.py
+        run: python ./TD/td_tdd/app/test.py
