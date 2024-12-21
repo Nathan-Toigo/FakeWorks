@@ -14,7 +14,7 @@ services:
       - "5672:5672"
   api:
     build:
-      context: ./backend
+      context: ./api
       dockerfile: Dockerfile.dev
     volumes:
       - ./backend:/app
