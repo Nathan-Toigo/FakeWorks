@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify, abort
 import redis
 import pika
 import os
+import json
 
 # RabbitMQ connection details
 RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', 'rabbitMQ')
@@ -43,10 +44,10 @@ def process():
         channel = connection.channel()
 
         # Declare queue
-        channel.queue_declare(queue=QUEUE_NAME, durable=True)
+        channel.queue_declare(queue=QUEUE_NAME)
         # Generate unique message id
         message_id = str(uuid.uuid4())
-        full_message = {'id': message_id, 'message': calculation}.__str__()
+        full_message = json.dumps({'id': message_id, 'message': calculation})
 
         # Publish message
         channel.basic_publish(exchange='',

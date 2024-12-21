@@ -1,0 +1,8 @@
+FROM python
+
+WORKDIR /app
+
+RUN pip install redis
+RUN pip install pika
+
+CMD ["python", "app.py"]

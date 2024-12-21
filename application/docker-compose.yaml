@@ -12,14 +12,37 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   api:
     build:
       context: ./api
       dockerfile: Dockerfile.dev
     volumes:
-      - ./backend:/app
+      - ./api:/app
     ports:
       - "5000:5000"
+    environment:
+      RABBITMQ_HOST: rabbitmq
     depends_on:
-      - redis
-      # - rabbitMQ
+      redis :
+        condition: service_started
+      rabbitMQ:
+        condition: service_healthy
+      
+  consumer:
+    build:
+      context: ./consumer
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./consumer:/app
+    environment:
+      RABBITMQ_HOST: rabbitmq
+    depends_on:
+      rabbitMQ:
+        condition: service_healthy
+      redis :
+        condition: service_started
