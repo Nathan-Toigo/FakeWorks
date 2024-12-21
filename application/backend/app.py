@@ -39,12 +39,9 @@ def result():
 @app.route('/api/v1/process', methods=['POST'])
 def process():
     try:
-        print(f" [x] Received ")
         # Get data from request
         data = request.json
-        print(f" [x] Received {data}")
         calculation = data.get('calculation', '')
-        print(f" [x] Received {calculation}")
         # Check if calculation is provided
         if not calculation:
             return jsonify({'error': 'Message is required'}), 400
@@ -56,13 +53,12 @@ def process():
         channel.queue_declare(queue=QUEUE_NAME, durable=True)
         # Generate unique message id
         message_id = str(uuid.uuid4())
-        full_message = {'id': message_id, 'message': calculation}
+        full_message = {'id': message_id, 'message': calculation}.__str__()
 
         # Publish message
         channel.basic_publish(exchange='',
                               routing_key=QUEUE_NAME,
                               body=full_message)
-        print(f" [x] Sent {full_message}")
         # Close connection
         connection.close()
         # Return message id
