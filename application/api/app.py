@@ -4,11 +4,6 @@ import redis
 import pika
 import os
 
-# RABBITMQ
-def callback(ch, method, properties, body):
-    r.set(self.id_message, eval(body))
-    print(f" [x] Received {body}")
-
 # RabbitMQ connection details
 RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', 'rabbitMQ')
 QUEUE_NAME = 'calculation'
@@ -16,7 +11,6 @@ QUEUE_NAME = 'calculation'
 # Establish connection to RabbitMQ
 def get_rabbitmq_connection():
     connection = pika.BlockingConnection(pika.ConnectionParameters(host=RABBITMQ_HOST))
-    properties = pika.BasicProperties(app_id='example-publisher', content_type='application/json', message_id='messageid')
     return connection
 
 # REDIS
@@ -24,7 +18,6 @@ r = redis.Redis(host='redis', port=6379, db=0, decode_responses=True)
 app = Flask(__name__)
 
 # API
-
 @app.route('/api/v1/result', methods=['GET'])
 def result():
     id_param = request.args.get("id")
