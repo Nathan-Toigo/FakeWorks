@@ -1,30 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
-html, body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-    background-color: #f0f0f0;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f0f0;
 }
-html{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+
+html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
-body,app-root{
-    height: 100%;
-    width: 100%;
+
+body,
+app-root {
+  height: 100%;
+  width: 100%;
 }
-app-root{
-    place-content: center;
-    align-items: center;
-    display: flex;
+
+app-root {
+  place-content: center;
+  align-items: center;
+  display: flex;
 }
 
 /** remove default styling for buttons */
-button{
-    border: none;
-    background: none;
-    cursor: pointer;
-    outline: none;
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
 }

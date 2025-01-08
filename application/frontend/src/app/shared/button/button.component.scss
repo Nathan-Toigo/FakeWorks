@@ -1,22 +1,22 @@
 .numpad-key {
     aspect-ratio: 25 / 16;
-    width: 100px;
-    height: 64px;
+    width: 6.25rem;
+    height: 4rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 39px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 2.438rem;
+    box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
     font-family: 'Jost';
-    font-size: 36px;
-    border: 1px solid black;
+    font-size: 2.25rem;
+    border: 0.063rem solid black;
     &.space{
         opacity: 0;
         pointer-events: none;
     }
     &.round{
-        width: 81px;
-        height: 81px;
-        border-radius: 999999px;
+        width: 5.063rem;
+        height: 5.063rem;
+        border-radius: 999999rem;
     }
 }

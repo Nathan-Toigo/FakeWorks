@@ -2,14 +2,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
     .arrow-container{
         position: relative;
-        width: 182px;
-        height: 182px;
+        width: 11.375rem;
+        height: 11.375rem;
         aspect-ratio: 1/1;
         background-image: "/assets/fleche.png";
-        filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.3));
+        filter: drop-shadow(0 0.25rem 0.25rem rgba(0, 0, 0, 0.3));
         .arrow{
             position: absolute;
             display: flex;
@@ -17,86 +17,92 @@
             justify-content: center;
             background-color: #E9E9E9;
             &#left{
-                width: 63px;
-                height: 54px; 
+                width: 3.938rem;
+                height: 3.375rem;
                 left : 0;
-                top: 63px;
-                border-left: 1px solid #000000;
-                border-bottom: 1px solid #000000;
-                border-top: 1px solid #000000;
-                border-radius: 26px 0 0 26px;
+                top: 3.938rem;
+                border-left: 0.063rem solid #000000;
+                border-bottom: 0.063rem solid #000000;
+                border-top: 0.063rem solid #000000;
+                border-radius: 1.625rem 0 0 1.625rem;
                 img{
                     transform: rotate(90deg);
                 }
             }
-            
+
             &#right{
-                width: 63px;
-                height: 54px; 
-                left: 118px;
-                top: 63px;
-                border-right: 1px solid #000000;
-                border-bottom: 1px solid #000000;
-                border-top: 1px solid #000000;
-                border-radius: 0 26px 26px 0;
+                width: 3.938rem;
+                height: 3.375rem;
+                left: 7.375rem;
+                top: 3.938rem;
+                border-right: 0.063rem solid #000000;
+                border-bottom: 0.063rem solid #000000;
+                border-top: 0.063rem solid #000000;
+                border-radius: 0 1.625rem 1.625rem 0;
                 img{
                     transform: rotate(270deg);
                 }
             }
-            
+
             &#up{
-                width: 54px;
-                height: 63px; 
+                width: 3.375rem;
+                height: 3.938rem;
                 top : 0;
-                left: 63px;
-                border-left: 1px solid #000000;
-                border-right: 1px solid #000000;
-                border-top: 1px solid #000000;
-                border-radius: 26px 26px 0 0;
+                left: 3.938rem;
+                border-left: 0.063rem solid #000000;
+                border-right: 0.063rem solid #000000;
+                border-top: 0.063rem solid #000000;
+                border-radius: 1.625rem 1.625rem 0 0;
                 img{
                     transform: rotate(180deg);
                 }
             }
-            
+
             &#down{
-                width: 54px;
-                height: 63px; 
-                top:  118px;
-                left: 63px;
-                border-left: 1px solid #000000;
-                border-right: 1px solid #000000;
-                border-bottom: 1px solid #000000;
-                border-radius: 0 0 26px 26px;
+                width: 3.375rem;
+                height: 3.938rem;
+                top:  7.375rem;
+                left: 3.938rem;
+                border-left: 0.063rem solid #000000;
+                border-right: 0.063rem solid #000000;
+                border-bottom: 0.063rem solid #000000;
+                border-radius: 0 0 1.625rem 1.625rem;
                 img{
                     transform: rotate(0deg);
                 }
             }
             &#center{
-                width: 55px;
-                height: 55px; 
-                top: 63px;
-                left: 63px;
+                width: 3.438rem;
+                height: 3.438rem;
+                top: 3.938rem;
+                left: 3.938rem;
             }
-    
+
             img{
-                width: 30px;
-                height: 30px;
+                width: 1.875rem;
+                height: 1.875rem;
             }
         }
-        
-        
-    
+
+
+
     }
     .general-container{
         display: flex;
         flex-direction: column;
-        margin: 12px 0;
-        gap: 25px;
+        margin: 0.75rem 0;
+        gap: 1.563rem;
     }
     .validation-container{
         display: flex;
         justify-content: space-between;
-        gap: 19px;
+        gap: 1.188rem;
     }
-}    
+    .general-container, .validation-container{
+      img{
+        height: 2.375rem;
+        width: 2.125rem;
+      }
+    }
+}
 

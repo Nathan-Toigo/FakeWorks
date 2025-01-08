@@ -3,27 +3,27 @@
     background-color: #ECECEC;
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;  
-    padding: 28px 72px 75px 72px;
-    width: 725px;
-    height: 1195px;
-    box-shadow: 0px 43px 20px 0px rgba(0, 0, 0, 0.25),
-        0px 9px 14px 8px rgba(0, 0, 0, 0.25),
-        inset -25px 0px 12px -12px rgba(0, 0, 0, 0.25),
-        inset 25px 0px 12px -12px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    padding: 1.75rem 4.5rem 4.688rem 4.5rem;
+    width: 45.313rem;
+    height: 74.688rem;
+    box-shadow: 0 2.688rem 1.25rem 0 rgba(0, 0, 0, 0.25),
+        0 0.563rem 0.875rem 0.5rem rgba(0, 0, 0, 0.25),
+        inset -1.563rem 0 0.75rem -0.75rem rgba(0, 0, 0, 0.25),
+        inset 1.563rem 0 0.75rem -0.75rem rgba(0, 0, 0, 0.25);
 
     h1 {
         font-family: 'Inter', sans-serif;
         font-style: normal;
         font-weight: 300;
-        font-size: 20px;
-        letter-spacing: 3px;
+        font-size: 1.25rem;
+        letter-spacing: 0.188rem;
         text-align: center;
     }
 
     .components-container {
         display: flex;
         flex-direction: column;
-        gap: 42px;
+        gap: 2.625rem;
     }
 }
