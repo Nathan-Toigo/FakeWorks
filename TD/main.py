@@ -1,1 +1,1 @@
-print("Pull request affichée dans python !")
+print("Pull request affichée dans python gag !")
