@@ -1,9 +1,9 @@
-import { Component, inject, QueryList } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { QueryRequest, QueryStatus } from './Request';
+import { QueryRequest } from './Request';
 
 const ELEMENT_DATA: QueryRequest[] = [
   new QueryRequest("1+3"),
@@ -20,7 +20,7 @@ const ELEMENT_DATA: QueryRequest[] = [
 ];
 
 @Component({
-  selector: 'table-basic',
+  selector: 'request-list',
   standalone: true,
   styleUrls: ['requestList.component.scss'],
   templateUrl: 'requestList.component.html',
@@ -31,7 +31,7 @@ export class RequestListComponent {
   
   private _snackBar = inject(MatSnackBar);
   
-  displayedColumns: string[] = ['calcul','result', 'status', 'UUID', 'requestButton'];
+  displayedColumns: string[] = ['calcul','result', 'status', 'action'];
   dataSource = ELEMENT_DATA;
 
   openSnackBar(message: string, action: string) {
@@ -40,5 +40,9 @@ export class RequestListComponent {
 
   requestResult(request: string) {
     this._snackBar.open(request + " has been sent", "OK");
+  }
+
+  deleteRequest(request : QueryRequest){
+    this.dataSource = this.dataSource.filter(item => item !== request);
   }
 }
