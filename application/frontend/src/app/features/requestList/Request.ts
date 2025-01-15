@@ -8,7 +8,6 @@ export class QueryRequest{
     this.calcul = calcul;
   }
 }
-
 export enum QueryStatus {
     PENDING = 'PENDING',
     DONE = 'DONE'
