@@ -3,22 +3,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { QueryRequest, QueryStatus } from './Request';
+import { QueryRequest, QueryStatus } from '../../shared/Request';
 import { GetResultService } from './get-result.service';
-
-const ELEMENT_DATA: QueryRequest[] = [
-  new QueryRequest("1+3"),
-  new QueryRequest("1+3"),
-  new QueryRequest("1+4"),
-  new QueryRequest("1+3"),
-  new QueryRequest("3+3"),
-  new QueryRequest("1+3"),
-  new QueryRequest("1+3"),
-  new QueryRequest("1+3"),
-  new QueryRequest("1+3"),
-  new QueryRequest("1+3"),
-  new QueryRequest("1+3")
-];
+import { ListService } from '../../shared/ListService';
 
 @Component({
   selector: 'request-list',
@@ -32,11 +19,16 @@ const ELEMENT_DATA: QueryRequest[] = [
 export class RequestListComponent {
   
   private _snackBar = inject(MatSnackBar);
-
-  constructor(private getResultService: GetResultService) {} 
-  
   displayedColumns: string[] = ['calcul','result', 'status', 'action'];
-  dataSource = ELEMENT_DATA;
+  dataSource : QueryRequest[] = [];
+
+  constructor(private getResultService: GetResultService, private listService: ListService) {
+    this.listService.list$.subscribe(updatedList => {
+      this.dataSource = updatedList.slice();
+    });
+  } 
+  
+  
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message + " copied in clipboard", action);
@@ -48,13 +40,7 @@ export class RequestListComponent {
     
     this.getResultService.getResults(request).subscribe({
       next: (data) => {
-        this.dataSource.forEach(item => {
-          if (item.UUID === request) {
-            item.status = QueryStatus.DONE;
-            item.result = data.result;
-          }
-        });
-
+        this.listService.updateRequest(request, QueryStatus.DONE, data.result);
       },
       error: (error) => {
         console.log(error);
@@ -63,7 +49,7 @@ export class RequestListComponent {
 
   }
 
-  deleteRequest(request : QueryRequest){
-    this.dataSource = this.dataSource.filter(item => item !== request);
+  deleteRequest(item : QueryRequest){
+    this.listService.removeItem(item);
   }
 }

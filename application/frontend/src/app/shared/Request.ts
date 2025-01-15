@@ -4,7 +4,8 @@ export class QueryRequest{
   status: QueryStatus = QueryStatus.PENDING;
   UUID: string = "Default-UUID";
 
-  constructor(calcul: string){
+  constructor(calcul: string, UUID: string){
+    this.UUID = UUID;
     this.calcul = calcul;
   }
 }

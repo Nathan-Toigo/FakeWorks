@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { ScreenComponent } from '../../shared/screen/screen.component';
 import { NumpadComponent } from '../../shared/numpad/numpad.component';
 import { ControlComponent } from '../../shared/control/control.component';
+import { PostRequest } from './post-request-interface';
+import { PostRequestService } from './post-request.service';
+import { ListService } from '../../shared/ListService';
 
 
 const arrow_messages = [
@@ -69,6 +72,9 @@ export class CalculatorComponent {
   currentMessage = '';
   currentIndex = 0;
 
+
+  constructor(private postRequestService : PostRequestService, private listService: ListService) {} 
+
   onKeyClickHandler({ value, type }: { value: string, type: string }) {
 
     if (type === "calculation") {
@@ -80,7 +86,22 @@ export class CalculatorComponent {
       }
     } else if (type === "exec" && this.currentMessage) {
       this.messages.push({ message: this.currentMessage, type: "calculation" });
+      
+      const calculation = this.currentMessage.replace(/x/g, '*');
+      const calculationDisplay = this.currentMessage
+      this.postRequestService.postRequest(calculation).subscribe({
+            next: (data) => {
+              this.listService.addItem(calculationDisplay, data.id);
+              
+              console.log(this.listService.getList());
+            },
+            error: (error) => {
+              console.log(error);
+            }
+          });
+
       this.currentMessage = '';
+
     } else if (type === "delete") {
       this.currentMessage = this.currentMessage.slice(0, this.currentIndex - 1) + this.currentMessage.slice(this.currentIndex);
       this.currentIndex--;
