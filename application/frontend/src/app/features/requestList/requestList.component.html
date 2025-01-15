@@ -29,7 +29,7 @@
       <th mat-header-cell *matHeaderCellDef> Action </th>
       <td mat-cell *matCellDef="let element">
         @if (element.status === 'PENDING') {
-          <button mat-flat-button (click)="requestResult(element.calcul)">Request result</button>
+          <button mat-flat-button (click)="requestResult(element.UUID)">Request result</button>
         }
         <button mat-icon-button (click)="deleteRequest(element)" ><mat-icon>delete</mat-icon></button>
         <button mat-icon-button aria-label="Copy" (click)="openSnackBar(element.UUID,'OK')">

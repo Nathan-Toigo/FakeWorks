@@ -4,6 +4,7 @@ import redis
 import pika
 import os
 import json
+from flask_cors import CORS
 
 # RabbitMQ connection details
 RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', 'rabbitMQ')
@@ -17,6 +18,7 @@ def get_rabbitmq_connection():
 # REDIS
 r = redis.Redis(host='redis', port=6379, db=0, decode_responses=True)
 app = Flask(__name__)
+CORS(app)
 
 # API
 @app.route('/api/v1/result', methods=['GET'])
