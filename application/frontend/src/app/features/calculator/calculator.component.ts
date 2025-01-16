@@ -1,62 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ScreenComponent } from '../../shared/screen/screen.component';
 import { NumpadComponent } from '../../shared/numpad/numpad.component';
 import { ControlComponent } from '../../shared/control/control.component';
-import { PostRequest } from './post-request-interface';
 import { PostRequestService } from './post-request.service';
 import { ListService } from '../../shared/ListService';
-
-
-const arrow_messages = [
-  "Where do you think we go?",
-  "Directionless, aren't we?",
-  "Lost in the void, again.",
-  "Arrows point to nowhere.",
-  "No escape this way."
-];
-const home_messages = [
-  "Nobody is going home.",
-  "Home is just an illusion.",
-  "No such place as 'home'.",
-  "Stay where you belong.",
-  "The door to home is gone."
-];
-const on_off_messages = [
-  "Power's out—forever.",
-  "Off is the new 'on'.",
-  "Lights dim, hope fades.",
-  "On? Not on my watch.",
-  "Power? That's ambitious."
-];
-const return_messages = [
-  "Mistakes linger forever.",
-  "No undo button here.",
-  "Returns are for the weak.",
-  "The past is unchangeable.",
-  "One way, no turning back."
-];
-const ok_messages = [
-  "OK? That's debatable.",
-  "Nothing's ever really OK.",
-  "OK is just false hope.",
-  "You think it's OK? Wrong.",
-  "OK, but not for you."
-];
-
-const parenthesis_messages = [
-  "Parentheses enclose despair.",
-  "Inside these, nothing's safe.",
-  "Syntax error—too open.",
-  "Closed, but not forgotten.",
-  "Parentheses trap the void."
-];
-const decimal_messages = [
-  "Precision won't save you.",
-  "A point of no return.",
-  "Decimals divide us all.",
-  "Small, but significant pain.",
-  "Numbers never lie, but do."
-];
+import { arrow_messages, decimal_messages, error_message, home_messages, ok_messages, on_off_messages, parenthesis_messages, return_messages, selectRandom, sent_message } from './dumb-sentences.data';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -67,13 +16,14 @@ const decimal_messages = [
   styleUrl: './calculator.component.scss'
 })
 export class CalculatorComponent {
+  private _snackBar = inject(MatSnackBar);
   title = 'FAKEWORKS';
   messages = [{ message: 'Welcome to FAKEWORKS!', type: "text" }, { message: 'Please enter a Calculation.', type: "text" }];
   currentMessage = '';
   currentIndex = 0;
 
 
-  constructor(private postRequestService : PostRequestService, private listService: ListService) {} 
+  constructor(private postRequestService: PostRequestService, private listService: ListService) { }
 
   onKeyClickHandler({ value, type }: { value: string, type: string }) {
 
@@ -86,20 +36,19 @@ export class CalculatorComponent {
       }
     } else if (type === "exec" && this.currentMessage) {
       this.messages.push({ message: this.currentMessage, type: "calculation" });
-      
+
       const calculation = this.currentMessage.replace(/x/g, '*');
       const calculationDisplay = this.currentMessage
+      this.messages.push({ message: selectRandom(sent_message), type: "text" });
       this.postRequestService.postRequest(calculation).subscribe({
-            next: (data) => {
-              this.listService.addItem(calculationDisplay, data.id);
-              
-              console.log(this.listService.getList());
-            },
-            error: (error) => {
-              console.log(error);
-            }
-          });
-
+        next: (data) => {
+          this.listService.addItem(calculationDisplay, data.id);
+        },
+        error: (error) => {
+          this.messages.push({ message: selectRandom(error_message), type: "error" });
+          this._snackBar.open("An error occured. Service down or network errror.", "Ok", { panelClass: ["error-snackbar"] });
+        }
+      });
       this.currentMessage = '';
 
     } else if (type === "delete") {
@@ -117,7 +66,7 @@ export class CalculatorComponent {
       if (type === "ok") messages = ok_messages;
       if (type === "parenthesis") messages = parenthesis_messages;
       if (type === "decimal") messages = decimal_messages;
-      this.messages.push({ message: messages[Math.floor(Math.random() * messages.length)], type: "strange_text" });
+      this.messages.push({ message: selectRandom(messages), type: "strange_text" });
     }
   }
 }

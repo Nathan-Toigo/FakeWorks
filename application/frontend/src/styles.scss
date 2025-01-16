@@ -36,3 +36,14 @@ button {
   cursor: pointer;
   outline: none;
 }
+
+.error-snackbar {
+  background-color: #f44336 !important;
+
+  div,
+  span {
+    background-color: #f44336 !important;
+
+    color: white !important;
+  }
+}
