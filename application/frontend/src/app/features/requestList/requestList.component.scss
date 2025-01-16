@@ -1,5 +1,32 @@
-table {
-    width: 100%;
-  }
+:host {
+  height: 74.688rem;
+  overflow: auto;
 
-  
+  table {
+    width: 100%;
+
+    tr {
+      &.empty-row td {
+        text-align: center;
+        padding: 1.5rem;
+        color: #00000099;
+      }
+
+      td {
+        text-align: center;
+
+        .delete {
+          color: #cf0000;
+        }
+
+        .done {
+          color: #2caf2c;
+        }
+
+        .pending {
+          color: #e99f00;
+        }
+      }
+    }
+  }
+}
