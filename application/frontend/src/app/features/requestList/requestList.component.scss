@@ -12,6 +12,21 @@
         color: #00000099;
       }
 
+      .mat-column-action{
+        width: 13rem !important;
+        max-width: 13rem !important;
+      }
+
+      .mat-column-calcul,
+      .mat-column-result {
+        word-wrap: break-word !important;
+        white-space: unset !important;
+        width: 15rem !important;
+        max-width: 15rem !important;
+      }
+
+
+
       td {
         text-align: center;
 
