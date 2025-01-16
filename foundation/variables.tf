@@ -15,3 +15,14 @@ variable "dns_names" {
     development = "calculatrice-dev.${var.domain}"
   }
 }
+variable "NOM_BINOME_1" {
+  type = string
+  default = "bidet"
+}
+
+variable "NOM_BINOME_2" {
+  type = string
+  default = "toigo"
+}
+
+
