@@ -1,22 +1,19 @@
-terraform {
-  required_providers {
-    scaleway = {
-      source = "scaleway/scaleway"
-    }
-  }
-  required_version = ">= 0.13"
-}
-
-
-
 module "load_balancer" {
   source      = "./modules/load_balancer"
-  environment = "prod"
-  lb_type     = "LB-M"
+  environment = var.environment
 }
 
-module "load_balancer" {
-  source      = "./modules/load_balancer"
-  environment = "dev"
-  lb_type     = "LB-S"
+module "database" {
+  source      = "./modules/database"
+  environment = var.environment
+  db_user     = var.db_user
+  db_password = var.db_password
+}
+
+module "domain" {
+  source      = "./modules/domain"
+  environment = var.environment
+  nom_binome_1 = var.nom_binome_1
+  nom_binome_2 = var.nom_binome_2
+  lb_ip = module.load_balancer.lb_ips
 }

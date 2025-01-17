@@ -1,17 +1,22 @@
 variable "environment" {
-  type        = string
+  type = list(string)
   description = "Name of the environment (production, development, etc.)"
 }
 
-variable "node_type" {
-  type        = string
+
+variable "db_type" {
+  type = map(string)
   description = "Type of the node (DB-GP-S, DB-GP-M, etc.)"
+  default = {
+    "production" = "DB-GP-M",
+    "development" = "DB-GP-S"
+  }
 }
 
-variable "DB_USER" {
+variable "db_user" {
   type = string
 }
 
-variable "DB_PASSWORD" {
+variable "db_password" {
   type = string
 }

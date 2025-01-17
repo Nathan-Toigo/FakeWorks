@@ -1,6 +1,6 @@
 variable "environment" {
-  type    = string
-  default = "production" # Peut être override avec terraform plan/apply
+  type    = list(string)
+  default = ["production", "development"]
 }
 
 variable "domain" {
@@ -8,21 +8,24 @@ variable "domain" {
   default = "polytech-dijon.kiowy.net"
 }
 
-variable "dns_names" {
-  type = map(string)
-  default = {
-    production  = "calculatrice.${var.domain}"
-    development = "calculatrice-dev.${var.domain}"
-  }
-}
-variable "NOM_BINOME_1" {
+
+variable "nom_binome_1" {
   type    = string
   default = "bidet"
 }
 
-variable "NOM_BINOME_2" {
+variable "nom_binome_2" {
   type    = string
   default = "toigo"
 }
 
+variable "db_user" {
+  type    = string
+  default = "fakeworks"
+}
+
+variable "db_password" {
+  type    = string
+  default = "fakeworks"
+}
 
