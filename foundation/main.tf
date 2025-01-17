@@ -18,4 +18,5 @@ module "domain" {
   nom_binome_1 = var.nom_binome_1
   nom_binome_2 = var.nom_binome_2
   environment = each.key
+  lb_id = module.load_balancer[each.key].lb_id
 }

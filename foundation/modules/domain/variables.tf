@@ -36,3 +36,8 @@ variable "name" {
   type = string
   default = "www"
 }
+
+variable "lb_id" {
+  type = string
+  description = "ID of the load balancer"
+}
