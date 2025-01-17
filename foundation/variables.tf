@@ -11,17 +11,17 @@ variable "domain" {
 variable "dns_names" {
   type = map(string)
   default = {
-    production = "calculatrice.${var.domain}"
+    production  = "calculatrice.${var.domain}"
     development = "calculatrice-dev.${var.domain}"
   }
 }
 variable "NOM_BINOME_1" {
-  type = string
+  type    = string
   default = "bidet"
 }
 
 variable "NOM_BINOME_2" {
-  type = string
+  type    = string
   default = "toigo"
 }
 

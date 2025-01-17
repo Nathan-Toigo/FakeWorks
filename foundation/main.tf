@@ -10,13 +10,13 @@ terraform {
 
 
 module "load_balancer" {
-  source          = "./modules/load_balancer"
-  environment     = "prod"
-  lb_type         = "LB-M"
+  source      = "./modules/load_balancer"
+  environment = "prod"
+  lb_type     = "LB-M"
 }
 
 module "load_balancer" {
-  source          = "./modules/load_balancer"
-  environment     = "dev"
-  lb_type         = "LB-S"
+  source      = "./modules/load_balancer"
+  environment = "dev"
+  lb_type     = "LB-S"
 }
