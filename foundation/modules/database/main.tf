@@ -1,8 +1,7 @@
 // Le SGBD
-resource "scaleway_rdb_instance" "main" {
-  for_each = toset(var.environment)
-  name           = "fakeworks-rdb-${each.key}"
-  node_type            = var.db_type[each.key]
+resource "scaleway_rdb_instance" "fakeworks_rdb" {
+  name           = "fakeworks-rdb-${var.environment}"
+  node_type            = var.db_type[var.environment]
   engine         = "PostgreSQL-15"
   is_ha_cluster  = true
   disable_backup = true
@@ -11,8 +10,7 @@ resource "scaleway_rdb_instance" "main" {
 }
 
 // La base de données
-resource "scaleway_rdb_database" "main" {
-  for_each = toset(var.environment)
-  instance_id    = scaleway_rdb_instance.main[each.key].id
-  name           = "fakeworks-db-${each.key}"
+resource "scaleway_rdb_database" "fakeworks_db" {
+  instance_id    = scaleway_rdb_instance.fakeworks_rdb.id
+  name           = "fakeworks-db-${var.environment}"
 }

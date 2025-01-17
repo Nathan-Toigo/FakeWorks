@@ -1,4 +1,4 @@
-variable "environment" {
+variable "environments" {
   type    = list(string)
   default = ["production", "development"]
 }

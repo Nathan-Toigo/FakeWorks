@@ -1,8 +1,7 @@
 resource "scaleway_domain_record" "calculatrice-bidet-toigo-polytech-dijon" {
-  for_each = toset(var.environment)
   dns_zone = var.dns_zone
-  name     = "${var.upper_domain[each.key]}.${var.nom_binome_1}-${var.nom_binome_2}.${var.lower_domain}"
+  name     = "${var.upper_domain[var.environment]}.${var.nom_binome_1}-${var.nom_binome_2}.${var.lower_domain}"
   type     = "A"
-  data     = var.lb_ip["lb-production"].public_ip
+  data     = "1.2.3.4"
   ttl      = 3600
 }

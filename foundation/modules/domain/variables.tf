@@ -1,5 +1,5 @@
 variable "environment" {
-  type = list(string)
+  type = string
   description = "Name of the environment (production, development, etc.)"
 }
 
@@ -35,9 +35,4 @@ variable "dns_zone" {
 variable "name" {
   type = string
   default = "www"
-}
-
-variable "lb_ip" {
-  type = map(string)
-  description = "IP of the load balancer"
 }

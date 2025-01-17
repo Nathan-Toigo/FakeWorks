@@ -1,5 +1,5 @@
 variable "environment" {
-  type = list(string)
+  type = string
   description = "Name of the environment (production, development, etc.)"
 }
 

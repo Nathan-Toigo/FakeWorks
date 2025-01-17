@@ -1,19 +1,21 @@
 module "load_balancer" {
+  for_each = toset(var.environments)
   source      = "./modules/load_balancer"
-  environment = var.environment
+  environment = each.key
 }
 
 module "database" {
+  for_each = toset(var.environments)
   source      = "./modules/database"
-  environment = var.environment
   db_user     = var.db_user
   db_password = var.db_password
+  environment = each.key
 }
 
 module "domain" {
+  for_each = toset(var.environments)
   source      = "./modules/domain"
-  environment = var.environment
   nom_binome_1 = var.nom_binome_1
   nom_binome_2 = var.nom_binome_2
-  lb_ip = module.load_balancer.lb_ips
+  environment = each.key
 }
