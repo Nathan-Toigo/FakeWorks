@@ -28,7 +28,7 @@ export class RequestListComponent {
     });
   }
 
-  openSnackBar(message: string) {
+  copySnackBar(message: string) {
     this._snackBar.open(message + " copied in clipboard", "", {duration : 2000});
   }
 
@@ -49,5 +49,13 @@ export class RequestListComponent {
 
   deleteRequest(item : QueryRequest){
     this.listService.removeItem(item);
+  }
+
+  copyInClipboard(UUID : string){
+    navigator.clipboard.writeText(UUID).then(() => {
+      this.copySnackBar(UUID);
+    }).catch(err => {
+      console.error('Could not copy text: ', err);
+    });
   }
 }
