@@ -6,6 +6,7 @@ import { PostRequestService } from './post-request.service';
 import { ListService } from '../../shared/ListService';
 import { arrow_messages, decimal_messages, error_message, home_messages, ok_messages, on_off_messages, parenthesis_messages, return_messages, selectRandom, sent_message } from './dumb-sentences.data';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { finalize } from 'rxjs/operators';
 
 
 @Component({
@@ -21,12 +22,16 @@ export class CalculatorComponent {
   messages = [{ message: 'Welcome to FAKEWORKS!', type: "text" }, { message: 'Please enter a Calculation.', type: "text" }];
   currentMessage = '';
   currentIndex = 0;
+  isSending = false;
 
 
   constructor(private postRequestService: PostRequestService, private listService: ListService) { }
 
   onKeyClickHandler({ value, type }: { value: string, type: string }) {
-
+    if (this.isSending) {
+      this._snackBar.open("Still sending last message", "", { duration: 1000 });
+      return;
+    }
     if (type === "calculation") {
       if (!/^\d*([\+\-\/x](\d*)?)?$/.test(this.currentMessage + value)) {
         this.messages.push({ message: "ERR : -> format int[+-x/]int", type: "error" });
@@ -39,12 +44,24 @@ export class CalculatorComponent {
 
       const calculation = this.currentMessage.replace(/x/g, '*');
       const calculationDisplay = this.currentMessage
-      this.messages.push({ message: selectRandom(sent_message), type: "text" });
-      this.postRequestService.postRequest(calculation).subscribe({
+      this.isSending = true;
+      let intervalId = setInterval(() => {
+        if (this.currentMessage.length < 3) this.currentMessage += ".";
+        else this.currentMessage = "";
+      }, 100);
+      this.postRequestService.postRequest(calculation).pipe(
+        finalize(() => {
+          clearInterval(intervalId);
+          this.currentMessage = "";
+          this.isSending = false;
+        }
+        )
+      ).subscribe({
         next: (data) => {
+          this.messages.push({ message: selectRandom(sent_message), type: "text" });
           this.listService.addItem(calculationDisplay, data.id);
         },
-        error: (error) => {
+        error: (_) => {
           this.messages.push({ message: selectRandom(error_message), type: "error" });
           this._snackBar.open("An error occured. Service down or network errror.", "Ok", { panelClass: ["error-snackbar"] });
         }
