@@ -22,7 +22,10 @@ def main():
         data = json.loads(body)
         message_id = data['id']
         expression = data['message']
-        result = eval(expression)
+        try:
+            result = eval(expression)
+        except Exception as e:
+            result = "Error occured: " + str(e)
         r.set(message_id, result)
         print(f" [x] Received {body}")
 
