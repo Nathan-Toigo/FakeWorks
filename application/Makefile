@@ -18,3 +18,8 @@ push-images:
 	$(foreach dir, $(DOCKERFILES_LOCATIONS), \
 		docker push $(DOCKER_REGISTRY)/$(DOCKER_IMAGE_PREFIX)-$(dir):$(DOCKER_TAG);\
 	)
+
+trivy:
+	$(foreach dir, $(DOCKERFILES_LOCATIONS), \
+		trivy image $(DOCKER_REGISTRY)/$(DOCKER_IMAGE_PREFIX)-$(dir):$(DOCKER_TAG);\
+	)
