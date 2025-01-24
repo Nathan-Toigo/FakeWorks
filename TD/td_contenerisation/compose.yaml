@@ -3,7 +3,7 @@ services:
     container_name: td_contenerisation_frontend
     build: 
       context: ./
-      dockerfile: Dockerfile.ngix
+      dockerfile: Dockerfile.nginx
     ports:
       - "8080:80"
     volumes:
