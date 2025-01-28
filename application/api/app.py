@@ -27,6 +27,7 @@ def result():
     if id_param is None:
         abort(400, description="id parameter is required")
     value = r.get(id_param)
+    r.delete(id_param)
     if value is None:
         abort(404, description="result not found")
     return {'result': value}
