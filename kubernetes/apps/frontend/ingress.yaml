@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-frontend
+  labels:
+    app.kubernetes.io/name: ingress-frontend
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: calculatrice-bidet-toigo-polytech-dijon.kiowy.net
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: svc-frontend
+            port:
+              number: 80

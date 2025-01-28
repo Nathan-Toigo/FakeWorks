@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-frontend
+  labels:
+    app.kubernetes.io/name: pods-frontend
+    
+spec:
+  selector:
+    app.kubernetes.io/name: pods-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

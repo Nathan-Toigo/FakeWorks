@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  labels:
+    app: frontend
+    soft: nginx
+  name: fakeworks-frontend-rs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pods-frontend
+      app.kubernetes.io/name: pods-frontend
+      soft: nginx
+  template:
+    metadata:
+      labels:
+        app: pods-frontend
+        app.kubernetes.io/name: pods-frontend
+        soft: nginx
+    spec:
+      containers:
+      - image: europe-west1-docker.pkg.dev/polytech-dijon/polytech-dijon/bidet-toigo-frontend:latest
+        name: pods-frontend
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "4m"
+            memory: "32Mi"
