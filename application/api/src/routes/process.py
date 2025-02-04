@@ -1,39 +1,14 @@
 import uuid
-from flask import Flask, request, jsonify, abort
-import redis
-import pika
-import os
 import json
-from flask_cors import CORS
 
-# RabbitMQ connection details
-RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', 'rabbitMQ')
+from flask import request, jsonify, Blueprint
+from utils.rabbitMQ import get_rabbitmq_connection
+
+process_blueprint = Blueprint('process', __name__)
+
 QUEUE_NAME = 'calculation'
 
-# Establish connection to RabbitMQ
-def get_rabbitmq_connection():
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host=RABBITMQ_HOST))
-    return connection
-
-# REDIS
-r = redis.Redis(host='redis', port=6379, db=0, decode_responses=True)
-app = Flask(__name__)
-CORS(app)
-
-# API
-@app.route('/api/v1/result', methods=['GET'])
-def result():
-    id_param = request.args.get("id")
-    if id_param is None:
-        abort(400, description="id parameter is required")
-    value = r.get(id_param)
-    r.delete(id_param)
-    if value is None:
-        abort(404, description="result not found")
-    return {'result': value}
-
-
-@app.route('/api/v1/process', methods=['POST'])
+@process_blueprint.route('/api/v1/process', methods=['POST'])
 def process():
     try:
         # Get data from request
@@ -63,5 +38,3 @@ def process():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
