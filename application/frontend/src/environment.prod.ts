@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api_url: 'svc_backend/api/v1'
+  api_url: 'http://calculatrice-bidet-toigo-polytech-dijon.kiowy.net/api/v1'
 };
