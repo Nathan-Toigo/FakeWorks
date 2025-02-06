@@ -11,7 +11,7 @@ init:
 
 build-images:
 	$(foreach dir, $(DOCKERFILES_LOCATIONS), \
-		docker build -t $(DOCKER_REGISTRY)/$(DOCKER_IMAGE_PREFIX)-$(dir):$(DOCKER_TAG) ./$(dir); \
+		docker build --no-cache -t $(DOCKER_REGISTRY)/$(DOCKER_IMAGE_PREFIX)-$(dir):$(DOCKER_TAG) ./$(dir); \
 	)
 
 push-images:
