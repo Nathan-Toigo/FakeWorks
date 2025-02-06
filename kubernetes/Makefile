@@ -24,6 +24,9 @@ get_namespaces:
 get_pods:
 	$(KUBE_BASE_COMMAND) get pods $(KUBE_NAMESPACE_PARAM)
 
+get_replicasets:
+	$(KUBE_BASE_COMMAND) get replicasets $(KUBE_NAMESPACE_PARAM)
+
 create_namespace:
 	$(KUBE_BASE_COMMAND) create namespace $(KUBE_NAMESPACE)
 
@@ -38,10 +41,16 @@ set_up:
 	@ $(KUBE_BASE_COMMAND) config set-context --current --namespace=$(KUBE_NAMESPACE);
 	@ echo "- Applying the ingress";
 	@ $(KUBE_BASE_COMMAND) apply -f ./apps/ingress.yaml;
+	@ echo "## FRONTEND";
 	@ echo "- Applying the service";
 	@ $(KUBE_BASE_COMMAND) apply -f ./apps/frontend/service.yaml;
 	@ echo "- Applying the deployment"
 	@ $(KUBE_BASE_COMMAND) apply -f ./apps/frontend/deployment.yaml;
+	@ echo "## API";
+	@ echo "- Applying the service";
+	@ $(KUBE_BASE_COMMAND) apply -f ./apps/api/service.yaml;
+	@ echo "- Applying the deployment"
+	@ $(KUBE_BASE_COMMAND) apply -f ./apps/api/deployment.yaml;
 	@ echo "- Adding the entry to /etc/hosts";
 	@ sudo sed -i '$$a 34.77.144.136 calculatrice-bidet-toigo-polytech-dijon.kiowy.net' /etc/hosts
 	@ echo "~~ Application has been set up ~~";
@@ -50,10 +59,16 @@ tear_down:
 	@ echo "Tearing down the application";
 	@ echo "- Deleting the ingress";
 	@ $(KUBE_BASE_COMMAND) delete -f ./apps/ingress.yaml;
+	@ echo "## FRONTEND";
 	@ echo "- Deleting the service";
 	@ $(KUBE_BASE_COMMAND) delete -f ./apps/frontend/service.yaml;
 	@ echo "- Deleting the deployment";
 	@ $(KUBE_BASE_COMMAND) delete -f ./apps/frontend/deployment.yaml;
+	@ echo "## API";
+	@ echo "- Deleting the service";
+	@ $(KUBE_BASE_COMMAND) delete -f ./apps/api/service.yaml;
+	@ echo "- Deleting the deployment";
+	@ $(KUBE_BASE_COMMAND) delete -f ./apps/api/deployment.yaml;
 	@ echo "- Deleting the namespace";
 	@ $(KUBE_BASE_COMMAND) delete namespace $(KUBE_NAMESPACE)
 	@ echo "- Removing the entry from /etc/hosts";
