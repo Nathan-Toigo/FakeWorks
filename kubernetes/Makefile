@@ -37,7 +37,7 @@ set_up:
 	@ echo "- Setting the namespace";
 	@ $(KUBE_BASE_COMMAND) config set-context --current --namespace=$(KUBE_NAMESPACE);
 	@ echo "- Applying the ingress";
-	@ $(KUBE_BASE_COMMAND) apply -f ./apps/frontend/ingress.yaml;
+	@ $(KUBE_BASE_COMMAND) apply -f ./apps/ingress.yaml;
 	@ echo "- Applying the service";
 	@ $(KUBE_BASE_COMMAND) apply -f ./apps/frontend/service.yaml;
 	@ echo "- Applying the deployment"
@@ -49,7 +49,7 @@ set_up:
 tear_down:
 	@ echo "Tearing down the application";
 	@ echo "- Deleting the ingress";
-	@ $(KUBE_BASE_COMMAND) delete -f ./apps/frontend/ingress.yaml;
+	@ $(KUBE_BASE_COMMAND) delete -f ./apps/ingress.yaml;
 	@ echo "- Deleting the service";
 	@ $(KUBE_BASE_COMMAND) delete -f ./apps/frontend/service.yaml;
 	@ echo "- Deleting the deployment";
