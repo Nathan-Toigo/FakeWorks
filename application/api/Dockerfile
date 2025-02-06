@@ -11,4 +11,4 @@ COPY ./pyproject.toml /app/pyproject.toml
 COPY ./src /app/src/
 RUN pip install waitress flask-restful redis pika flask-cors
 EXPOSE 80
-CMD waitress-serve --port=${APP_PORT} --call src.app:create_app
+CMD waitress-serve --port=$APP_PORT --call src.app:create_app
