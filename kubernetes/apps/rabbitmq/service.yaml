@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-rabbitmq
+  labels:
+    app.kubernetes.io/name: pods-rabbitmq
+    
+spec:
+  selector:
+    app.kubernetes.io/name: pods-rabbitmq
+  ports:
+    - name : upper-port
+      protocol: TCP
+      port: 15672
+      targetPort: 15672
+    - name : lower-port
+      protocol: TCP
+      port: 5672
+      targetPort: 5672

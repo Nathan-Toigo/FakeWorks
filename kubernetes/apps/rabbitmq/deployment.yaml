@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  labels:
+    app: rabbitmq
+    soft: rabbitmq
+  name: fakeworks-rabbitmq-rs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pods-rabbitmq
+      app.kubernetes.io/name: pods-rabbitmq
+      soft: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: pods-rabbitmq
+        app.kubernetes.io/name: pods-rabbitmq
+        soft: rabbitmq
+    spec:
+      containers:
+      - image: rabbitmq
+        name: pods-rabbitmq
+        ports:
+        - containerPort: 15672
+          protocol: TCP
+        - containerPort: 5672
+          protocol: TCP

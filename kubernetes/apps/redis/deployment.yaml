@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  labels:
+    app: redis
+    soft: redis
+  name: fakeworks-redis-rs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pods-redis
+      app.kubernetes.io/name: pods-redis
+      soft: redis
+  template:
+    metadata:
+      labels:
+        app: pods-redis
+        app.kubernetes.io/name: pods-redis
+        soft: redis
+    spec:
+      containers:
+      - image: redis
+        name: pods-redis
+        ports:
+        - name: redis-port
+          containerPort: 6379
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "4m"
+            memory: "32Mi"
