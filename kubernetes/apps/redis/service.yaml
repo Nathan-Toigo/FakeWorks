@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: svc-redis
   labels:
-    app.kubernetes.io/name: pods-rabbitmq
+    app.kubernetes.io/name: pods-redis
     
 spec:
   selector:
-    app.kubernetes.io/name: pods-rabbitmq
+    app.kubernetes.io/name: pods-redis
   ports:
     - protocol: TCP
       port: 6379

@@ -9,7 +9,10 @@ RABBITMQ_HOST = os.getenv('RABBITMQ_HOST', 'rabbitMQ')
 QUEUE_NAME = 'calculation'
 
 # REDIS
-r = redis.Redis(host='redis', port=6379, db=0, decode_responses=True)
+REDIS_HOST = os.getenv('REDIS_HOST', 'redis')
+REDIS_PORT = os.getenv('REDIS_PORT', '6379')
+
+r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=0, decode_responses=True)
 
 
 def main():

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  labels:
+    app: consumer
+    soft: waitress
+  name: fakeworks-consumer-rs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pods-consumer
+      app.kubernetes.io/name: pods-consumer
+      soft: waitress
+  template:
+    metadata:
+      labels:
+        app: pods-consumer
+        app.kubernetes.io/name: pods-consumer
+        soft: waitress
+    spec:
+      containers:
+      - image: europe-west1-docker.pkg.dev/polytech-dijon/polytech-dijon/bidet-toigo-consumer:latest
+        name: pods-consumer
+        resources:
+          limits:
+            cpu: "4m"
+            memory: "32Mi"
+        env:
+        - name: RABBITMQ_HOST
+          value: svc-rabbitmq
+        - name: REDIS_HOST
+          value: svc-redis
+        - name: REDIS_PORT
+          value: "6379"

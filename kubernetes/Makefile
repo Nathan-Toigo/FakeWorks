@@ -33,7 +33,8 @@ create_namespace:
 describe_namespace:
 	$(KUBE_BASE_COMMAND) describe namespace $(KUBE_NAMESPACE)
 
-KUBERNETES_REPLICASET:=rabbitmq redis api frontend
+KUBERNETES_SERVICE:=rabbitmq redis api frontend
+KUBERNETES_REPLICASET:=$(KUBERNETES_SERVICE) consumer
 
 set_up:
 	@ echo "Setting up the application";
@@ -43,13 +44,13 @@ set_up:
 	@ $(KUBE_BASE_COMMAND) config set-context --current --namespace=$(KUBE_NAMESPACE);
 	@ echo "- Applying the ingress";
 	@ $(KUBE_BASE_COMMAND) apply -f ./apps/ingress.yaml;
-	
 	@  $(foreach dir, $(KUBERNETES_REPLICASET), \
-		echo "## ${dir}";\
-		echo "- Applying the service";\
-		$(KUBE_BASE_COMMAND) apply -f ./apps/${dir}/service.yaml;\
-		echo "- Applying the deployment";\
+		echo "- Applying the deployment of ${dir}";\
 		$(KUBE_BASE_COMMAND) apply -f ./apps/${dir}/deployment.yaml;\
+	)
+	@  $(foreach dir, $(KUBERNETES_SERVICE), \
+		echo "- Applying the service of ${dir}";\
+		$(KUBE_BASE_COMMAND) apply -f ./apps/${dir}/service.yaml;\
 	)
 	@ echo "- Adding the entry to /etc/hosts";
 	@ sudo sed -i '$$a 34.77.144.136 calculatrice-bidet-toigo-polytech-dijon.kiowy.net' /etc/hosts
@@ -61,10 +62,13 @@ tear_down:
 	@ $(KUBE_BASE_COMMAND) delete -f ./apps/ingress.yaml;
 	@  $(foreach dir, $(KUBERNETES_REPLICASET), \
 		echo "## ${dir}";\
-		echo "- Deleting the service";\
-		$(KUBE_BASE_COMMAND) delete -f ./apps/${dir}/service.yaml;\
 		echo "- Deleting the deployment";\
 		$(KUBE_BASE_COMMAND) delete -f ./apps/${dir}/deployment.yaml;\
+	)
+	@  $(foreach dir, $(KUBERNETES_SERVICE), \
+		echo "## ${dir}";\
+		echo "- Deleting the service";\
+		$(KUBE_BASE_COMMAND) delete -f ./apps/${dir}/service.yaml;\
 	)
 	@ echo "- Deleting the namespace";
 	@ $(KUBE_BASE_COMMAND) delete namespace $(KUBE_NAMESPACE)

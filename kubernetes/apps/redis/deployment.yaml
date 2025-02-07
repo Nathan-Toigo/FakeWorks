@@ -20,13 +20,9 @@ spec:
         soft: redis
     spec:
       containers:
-      - image: redis
+      - image: redis:alpine
         name: pods-redis
         ports:
         - name: redis-port
           containerPort: 6379
           protocol: TCP
-        resources:
-          limits:
-            cpu: "4m"
-            memory: "32Mi"
