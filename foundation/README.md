@@ -270,3 +270,29 @@ Plan: 12 to add, 0 to change, 0 to destroy.
 Note: You didn't use the -out option to save this plan, so Terraform can't
 guarantee to take exactly these actions if you run "terraform apply" now.
 ```
+
+## Schema of what is planned 
+
+
+```mermaid
+ graph
+  subgraph k8s ["Cluster Kubernetes"]
+    direction TB
+    node1
+    node2
+    node3
+  end
+  lbA["LoadBalancer
+        (production)"] --> k8s
+  lbB["LoadBalancer
+        (development)"]  --> k8s
+  dns1(["DNS
+        calculatrice-dev.bidet-toigo.polytech-dijon.kiowy.net"]) --> lbB
+  dns2(["DNS
+        calculatrice-bidet-toigo-polytech-dijon.polytech-dijon.kiowy.net"]) --> lbA
+  k8s --> db["Base de données
+              (production)"]
+  k8s --> reg[registre de conteneur]
+  k8s --> db2["Base de données
+              (develop)"]
+```
