@@ -18,9 +18,9 @@ module "domain" {
   nom_binome_1 = var.nom_binome_1
   nom_binome_2 = var.nom_binome_2
   environment  = each.key
-  // On récupère l'ID du load balancer pour le passer au module domain
-  // On utilise la syntaxe module.<module_name>.<output_name>
-  // Ici, le nom du module est load_balancer suivi de l'environnement
+  // Retrieve the ID of the load balancer to pass it to the domain module
+  // Use the syntax module.<module_name>.<output_name>
+  // Here, the module name is load_balancer followed by the environment
   lb_id        = module.load_balancer[each.key].lb_id
 }
 
