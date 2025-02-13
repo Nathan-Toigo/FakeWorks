@@ -30,6 +30,27 @@ docker compose -f docker-compose.prod.yaml up
 
 That's it ! You can now test our app locally
 
+## Our AWESOME Makefile
+
+As a developer, we want things to be version controlled, even to the commands we use to build and push.
+To achieve that, we've been using a Makefile. It consists of 3 main commands :
+- init : Allows you to login into gcloud and auto configuration for our project.
+- build-images : Will build each image and tag them appropriately
+- push-images : Will push each image on the configured project in `europe-west1-docker.pkg.dev`
+
+Also we've added a trivy image scan analysis but we did not use it intensively.
+
+## Pushing to repository
+
+Using our awesome makefile make it easy to push our images to the repo.
+
+If you already did the init step, you only have to do the following
+
+```
+make build-images
+make push-images
+```
+
 ## Frontend
 
 ### Tech
