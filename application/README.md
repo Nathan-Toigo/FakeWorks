@@ -1,6 +1,35 @@
 # Application
 
 
+## Prerequisite
+
+- [gcloud](https://cloud.google.com/sdk/docs/install?hl=fr)
+- [docker](https://docs.docker.com/engine/install/)
+
+And that's it ! All the rest is containerised !
+
+## Quick start
+
+So you don't want to read all our README, you meanie ~ 
+
+<img src="https://media.tenor.com/GF3gAxfRPOsAAAAM/anime-girl-meh.gif" style="width:50%;">
+
+Well, that's okay~ You don't want to lose some precious time after all, uwu
+
+To start our app localy in dev mode, you only need to run
+
+```
+docker compose up
+```
+
+You wanna start it in production mode locally ? Then use
+
+```
+docker compose -f docker-compose.prod.yaml up 
+```
+
+That's it ! You can now test our app locally
+
 ## Frontend
 
 ### Tech
