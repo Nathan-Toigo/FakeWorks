@@ -130,7 +130,7 @@ virtualenv venv
 source venv/bin/activate
 ```
 
-# Authors
+## Authors
 
 
 <div align="center">
