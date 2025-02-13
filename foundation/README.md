@@ -1,5 +1,42 @@
 # Terraform
 
+So we had to provision resources following this schema :
+
+```mermaid
+graph LR
+  subgraph k8s ["Kubernetes Cluster"]
+    direction TB
+    node1
+    node2
+    node3
+  end
+  lbA["LoadBalancer
+        (production)"] --> k8s
+  lbB["LoadBalancer
+        (development)"]  --> k8s
+  dns1(["DNS
+        calculatrice-dev.polytech-dijon.kiowy.net"]) --> lbB
+  dns2(["DNS
+        calculatrice.polytech-dijon.kiowy.net"]) --> lbA
+  k8s --> db["Database
+              (production)"]
+  k8s --> reg[container registry]
+  k8s --> db2["Database
+              (develop)"]
+```
+
+## Run our thing !
+
+As I HATE installing things, I containerized terraform. You can easily test our thing using the make commands in our make file :
+
+|Command|Description|
+|-|-|
+|tf-init|To make terraform acknowledge our modules|
+|tf-fmt|To format|
+|tf-validate|To validate|
+|tf-plan|To plan|
+
+
 ## Result of `terraform plan`
 
 So let's do it :
@@ -276,23 +313,99 @@ guarantee to take exactly these actions if you run "terraform apply" now.
 
 ```mermaid
  graph
-  subgraph k8s ["Cluster Kubernetes"]
+  subgraph k8s ["Cluster Kubernetes cluster-k8s-fakeworks"]
     direction TB
-    node1
-    node2
-    node3
+    node["
+        pool-k8s-fakeworks"]
   end
-  lbA["LoadBalancer
+  lbA["fakeworks_load_balancer
         (production)"] --> k8s
-  lbB["LoadBalancer
+  lbB["fakeworks_load_balancer
         (development)"]  --> k8s
   dns1(["DNS
         calculatrice-dev.bidet-toigo.polytech-dijon.kiowy.net"]) --> lbB
   dns2(["DNS
         calculatrice-bidet-toigo-polytech-dijon.polytech-dijon.kiowy.net"]) --> lbA
-  k8s --> db["Base de données
+  k8s --> db["fakeworks_db
               (production)"]
-  k8s --> reg[registre de conteneur]
-  k8s --> db2["Base de données
+  k8s --> reg["container registry
+                fakeworks_container_registry"]
+  k8s --> db2["fakeworks_db
               (develop)"]
 ```
+
+But it's a little bit more complicated. A database cannot be provisionnised alone, nor can a pool.
+
+Thus, for each :
+
+|Module|Resources & type|Description (if needed)|
+|-|-|-|
+|Database|**fakeworks_rdb** - scaleway_rdb_instance|Represents an entire managed database instance on Scaleway RDB. Defines the engine used (postgres) among ohter|
+|Database|**fakeworks_db** - scaleway_rdb_database|Represents the fakeworks_rdb instance.|
+|Domain|**calculatrice-bidet-toigo-polytech-dijon** - scaleway_domain_record|One for production|
+|Domain|**calculatrice-bidet-toigo-polytech-dijon** - scaleway_domain_record|The other for dev|
+|K8s|**cluster-k8s-fakeworks** - scaleway_k8s_cluster|Use resources from the pool to run its things|
+|K8s|**pool-k8s-fakeworks** - scaleway_k8s_pool|Resources made available for use as a pool of resources|
+|K8s|**pn-k8s-fakeworks** - scaleway_vpc_private_network| Private network for the cluser |
+|load_balancer|**fakeworks_load_balancer** - scaleway_lb| One for production |
+|load_balancer|**fakeworks_load_balancer** - scaleway_lb| The other for dev |
+|registry|**fakeworks_container_registry** - scaleway_registry_namespace|-|
+
+## Point of interest
+
+As we are some old dev with the grandiloquent DRY principle drilled in our skull to the very core, we wanted to avoid at all cost to repeat resources for dev and prod, thus we made full use of terraform capabilities to generate those in a streamlined way.
+
+First in the `domain/variables.tf` we will find things like :
+
+```
+variable "environment" {
+  type = string
+  description = "Name of the environment (production, development, etc.)"
+}
+
+variable "upper_domain" {
+  type = map(string)
+  description = "Type of load balancer (LB-S, LB-M, LB-L)"
+  default = {
+    "production" = "calculatrice",
+    "development" = "calculatrice-dev"
+  }
+}
+```
+In upper domain, we define a dictionnary. Depending on the key, we will change the value of the variable returned.
+
+Also, the file takes an argument named `environment`. This is the one beeing used as the value accessor in our `upper_domain` variable.
+
+Thus in the `domain/main.tf`, it is used as 
+
+```
+resource "scaleway_domain_record" "calculatrice-bidet-toigo-polytech-dijon" {
+  ...
+  name     = ...${var.lower_domain}"
+  ...
+}
+```
+
+Then in the main `variable.tf` at the base of our foundation, we find the following :
+```
+variable "environments" {
+  type    = list(string)
+  default = ["production", "development"]
+}
+```
+
+Used as 
+
+
+```
+module "domain" {
+  for_each     = toset(var.environments)
+  ...
+  environment  = each.key
+  ...
+}
+```
+
+Very smart right ?
+
+Also we passed values around using `outputs.tf` in `load_balancer` to pass the load balancer ip to the DNS.
