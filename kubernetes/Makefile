@@ -39,7 +39,7 @@ KUBERNETES_REPLICASET:=$(KUBERNETES_SERVICE) consumer
 set_up:
 	@ echo "Setting up the application";
 	@ echo "- Creating the namespace";
-	@ $(KUBE_BASE_COMMAND) create namespace $(KUBE_NAMESPACE); true
+	@ $(KUBE_BASE_COMMAND) apply -f ./namespace.yaml;
 	@ echo "- Setting the namespace";
 	@ $(KUBE_BASE_COMMAND) config set-context --current --namespace=$(KUBE_NAMESPACE);
 	@ echo "- Applying the ingress";
@@ -71,7 +71,7 @@ tear_down:
 		$(KUBE_BASE_COMMAND) delete -f ./apps/${dir}/service.yaml;\
 	)
 	@ echo "- Deleting the namespace";
-	@ $(KUBE_BASE_COMMAND) delete namespace $(KUBE_NAMESPACE)
+	@ $(KUBE_BASE_COMMAND) delete -f ./namespace.yaml;
 	@ echo "- Removing the entry from /etc/hosts";
 	@ sudo sed -i '/34.77.144.136 calculatrice-bidet-toigo-polytech-dijon.kiowy.net/d' /etc/hosts;
 	@ echo "~~ Application has been torn down ~~" ;
