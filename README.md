@@ -30,116 +30,35 @@
 	</table>
 </div>
 
-## Sommaire
+## Table of content
 
 * [Fondation](foundation/README.md)
 * [Kubernetes](kubernetes/README.md)
 * [Application](application/README.md)
 
-## Développement des services
+## Project Overview
+This project is part of an academic cloud computing module. It involves designing and deploying a cloud-based architecture that integrates scalable and efficient services. The goal is to apply modern cloud computing techniques to develop a simple web project : a calculator.
 
->Cette partie traite du développement des différents services. pour chaque service, nous parlons :
->- Des raisons du choix de la technologie
->- De leur architecture
->- Des potentiels problèmes rencontrés
+Key aspects of the project include:
+- Cloud infrastructure setup
+- Containerization and orchestration
+- CI/CD pipeline implementation
+- Monitoring and security measures
+- Performance optimization
 
-### Frontend
+## Related Skills
+This project helps develop and strengthen several technical and professional skills, including:
+- **Cloud Architecture:** Understanding and implementing cloud service models (IaaS, PaaS, SaaS).
+- **DevOps Practices:** Using CI/CD tools to automate software deployment.
+- **Containerization & Orchestration:** Working with Docker and Kubernetes to manage applications.
+- **Networking & Security:** Ensuring secure communication and access control in cloud environments.
+- **Scalability & Performance Tuning:** Optimizing cloud resources for cost-effectiveness and efficiency.
 
-#### Les raisons
-Le frontend à été développé avec le framework Angular, en utilisant typescript. La raison pour ce choix est qu'Arno était déjà familié avec ce framework et Nathan était intéressé à l'idée de le découvrir à travers un projet. Voici l'architecture simplifié :
+## About the Authors
+This project is conducted by two students passionate about cloud technologies and software development:
 
-```tree
-.
-├── angular.json
-├── dist
-│   └── [Fichiers compilés en JS envoyé au navigateur]
-├── dockerfile
-├── node_modules
-│   └── [Tout]
-│   └── [Plein]
-│   └── [De]
-│   └── [Paquets]
-│   └── […]
-├── src
-│   ├── app
-│   │   ├── app.component.html
-│   │   ├── app.component.scss
-│   │   ├── app.component.ts
-│   │   ├── app.config.ts
-│   │   ├── app.routes.ts
-│   │   ├── features
-│   │   │   └── [composants d'affichage utilisés dans le composant principal]
-│   │   └── shared
-│   │   │   └── [composants d'affichage partagés]
-│   ├── assets
-│   │   └── [Des images et fichiers svg utilisés pour l'affichage]
-│   ├── environments
-│   │   └── [variables d'environnement de dev et de prod]
-│   ├── favicon.ico
-│   ├── index.html
-│   ├── main.ts
-│   └── styles.scss
-└── [Quelques fichiers de configurations de Typescript]
-```
-
-Cette structure nous à permis d'avoir un environnement propre et propice à l'évolution.
-
-### Backend 
-
-Le backend à été écrit en python, en utilisant le paquet **Flask** pour la mise en place de l'API. D'autres paquets ont étés installés comme **pika** et **redis** pour la communication avec les services *RabbitMQ* et la base *Redis* ou des paquets mineurs comme **flask_cors** pour lutilisation des méthodes CORS pour l'api.
-
-Voici l'architecture de l'application :
-
-```tree
-.
-├── Dockerfile
-├── Dockerfile.dev
-├── __pycache__
-│   └── app.cpython-311.pyc
-├── pyproject.toml
-└── src
-    ├── app.py
-    ├── __pycache__
-    │   └── app.cpython-311.pyc
-    ├── routes
-    │   ├── __init__.py
-    │   ├── process.py
-    │   ├── __pycache__
-    │   └── result.py
-    └── utils
-        ├── __init__.py
-        ├── __pycache__
-        ├── rabbitMQ.py
-        └── redis.py
-```
-
-
-
-### Consumer
-
-Comme le backend, le consumer à été écrit en python. Les paquets utilisés sont **pika** et **redis** pour la communication avec *RabbitMQ* pour le premier et la communication avec la base *Redis* pour le second.
-
-Voici l'architecture de l'application :
-
-```tree
-.
-├── app.py
-├── Dockerfile
-└── Dockerfile.dev
-```
-
-### RabbitMQ
-
-La mise en place du service *RabbitMQ* à été rapide. Il a suffit de créer un service depuis les images de RabbitMQ déjà existantes.
-
-### Redis
-
-Comme pour le service *RabbitMQ*, la base *Redis* a été mise en place en ajoutant un service dans le fichier `docker-compose.yaml` en utilisant une image déjà existante.
-
-## Mise en production des services
-
-
-
+- **<a href="https://github.com/ArnoBidet">Arno Bidet</a></td>** – A derranged man, obsessed with docker and containerization. Often seen running naked in the woods.
+- **<a href="https://github.com/Nathan-Toigo">Nathan Toïgo</a>** – A very cool, competent, wholesome, interesting, thoughtful genius. He's been seen on a roof of a Gotham building, wearing a black stylish costume.
 
 
 
