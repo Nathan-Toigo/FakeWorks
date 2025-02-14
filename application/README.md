@@ -63,9 +63,12 @@ One of the biggest challenges we faced in choosing Angular over a simple HTML/CS
 
 ### Backend
 
-The backend was written in **Python** using the **Flask** package to set up the API. Additional packages such as **pika** and **redis** were installed for communication with *RabbitMQ* services and the *Redis* database. Minor packages like **flask_cors** were also used to enable CORS methods for the API.
+#### Reasons
 
-Here is the application architecture:
+The backend was written in **Python** using the **Flask** package to set up the API. Additional packages such as **pika** and **redis** were installed for communication with *RabbitMQ* services and the *Redis* database. Minor packages like **flask_cors** were also used to enable CORS methods for the API. We chose this technology because it's pretty easy to setup :)
+
+#### The architecture
+Here is the architecture of the backend application:
 
 ```tree
 .
@@ -89,12 +92,16 @@ Here is the application architecture:
         ├── rabbitMQ.py
         └── redis.py
 ```
+#### Challenges encountered
+It took a little time and testing to get the communication between *Redis* and *RabbitMQ* but nothing too crazy.
 
 ### Consumer
 
-Like the backend, the consumer was written in **Python**. The packages used are **pika** and **redis** for communication with *RabbitMQ* and the *Redis* database, respectively.
+#### Reasons
+Like the backend, the consumer was written in **Python** for the same reasons (it's easy). The packages used are **pika** and **redis** for communication with *RabbitMQ* and the *Redis* database, respectively.
 
-Here is the application architecture:
+#### The architecture
+Here is the (awesome) architecture of the consumer application:
 
 ```tree
 .
@@ -102,6 +109,8 @@ Here is the application architecture:
 ├── Dockerfile
 └── Dockerfile.dev
 ```
+#### Challenges encountered
+Just like for the Backend, we took some time to set the communications between the app and *Redis* and *RabbitMQ*.
 
 ### RabbitMQ
 
