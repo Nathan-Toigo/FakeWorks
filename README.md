@@ -38,6 +38,54 @@
 
 ## Déroulé du projet
 
+### Développement de l'application front
+
+Le frontend à été développé avec le framework Angular, en utilisant typescript. La raison pour ce choix est qu'Arno était déjà familié avec ce framework et Nathan était intéressé à l'idée de le découvrir à travers un projet. Voici l'architecture simplifié :
+
+```tree
+.
+├── angular.json
+├── dist
+│   └── [Fichiers compilés en JS envoyé au navigateur]
+├── dockerfile
+├── node_modules
+│   └── [Tout]
+│   └── [Plein]
+│   └── [De]
+│   └── [Paquets]
+│   └── […]
+├── src
+│   ├── app
+│   │   ├── app.component.html
+│   │   ├── app.component.scss
+│   │   ├── app.component.ts
+│   │   ├── app.config.ts
+│   │   ├── app.routes.ts
+│   │   ├── features
+│   │   │   └── [composants d'affichage utilisés dans le composant principal]
+│   │   └── shared
+│   │   │   └── [composants d'affichage partagés]
+│   ├── assets
+│   │   └── [Des images et fichiers svg utilisés pour l'affichage]
+│   ├── environments
+│   │   └── [variables d'environnement de dev et de prod]
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── main.ts
+│   └── styles.scss
+└── [Quelques fichiers de configurations de Typescript}
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 
