@@ -57,7 +57,7 @@ This project helps develop and strengthen several technical and professional ski
 ## About the Authors
 This project is conducted by two students passionate about cloud technologies and software development:
 
-- **<a href="https://github.com/ArnoBidet">Arno Bidet</a></td>** – A derranged man, obsessed with docker and containerization. Often seen running naked in the woods.
+- **<a href="https://github.com/ArnoBidet">Arno Bidet</a></td>** – A deranged man, obsessed with docker and containerization. Often seen running naked in the woods.
 - **<a href="https://github.com/Nathan-Toigo">Nathan Toïgo</a>** – A very cool, competent, wholesome, interesting, thoughtful genius. He's been seen on a roof of a Gotham building, wearing a black stylish costume.
 
 
