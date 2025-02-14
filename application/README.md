@@ -8,13 +8,116 @@
 
 And that's it ! All the rest is containerised !
 
+## Project Overview
+
+>This section covers the development of different services. For each service, we discuss:
+>- The reasons behind the technology choices
+>- Their architecture
+>- Potential challenges encountered
+
+### Frontend
+
+#### Reasons
+The frontend was developed using the **Angular** framework with **TypeScript**. This choice was made because Arno was already familiar with this framework, and Nathan was interested in discovering it through this project. 
+
+#### The architecture
+Here is the simplified architecture of the frontend application:
+
+```tree
+.
+├── angular.json
+├── dist
+│   └── [Compiled JS files sent to the browser]
+├── dockerfile
+├── node_modules
+│   └── [Everything]
+│   └── [A lot]
+│   └── [Of]
+│   └── [Packages]
+│   └── […]
+├── src
+│   ├── app
+│   │   ├── app.component.html
+│   │   ├── app.component.scss
+│   │   ├── app.component.ts
+│   │   ├── app.config.ts
+│   │   ├── app.routes.ts
+│   │   ├── features
+│   │   │   └── [UI components used in the main component]
+│   │   └── shared
+│   │   │   └── [Shared UI components]
+│   ├── assets
+│   │   └── [Images and SVG files used for display]
+│   ├── environments
+│   │   └── [Dev and prod environment variables]
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── main.ts
+│   └── styles.scss
+└── [Some TypeScript configuration files]
+```
+
+#### Challenges encountered
+
+One of the biggest challenges we faced in choosing Angular over a simple HTML/CSS/JS app was the **increased complexity and learning curve**. We took some time to set up the project and Arno had to teach Nathan on how the frameworks works.
+
+### Backend
+
+The backend was written in **Python** using the **Flask** package to set up the API. Additional packages such as **pika** and **redis** were installed for communication with *RabbitMQ* services and the *Redis* database. Minor packages like **flask_cors** were also used to enable CORS methods for the API.
+
+Here is the application architecture:
+
+```tree
+.
+├── Dockerfile
+├── Dockerfile.dev
+├── __pycache__
+│   └── app.cpython-311.pyc
+├── pyproject.toml
+└── src
+    ├── app.py
+    ├── __pycache__
+    │   └── app.cpython-311.pyc
+    ├── routes
+    │   ├── __init__.py
+    │   ├── process.py
+    │   ├── __pycache__
+    │   └── result.py
+    └── utils
+        ├── __init__.py
+        ├── __pycache__
+        ├── rabbitMQ.py
+        └── redis.py
+```
+
+### Consumer
+
+Like the backend, the consumer was written in **Python**. The packages used are **pika** and **redis** for communication with *RabbitMQ* and the *Redis* database, respectively.
+
+Here is the application architecture:
+
+```tree
+.
+├── app.py
+├── Dockerfile
+└── Dockerfile.dev
+```
+
+### RabbitMQ
+
+Setting up the *RabbitMQ* service was quick. We simply created a service using pre-existing *RabbitMQ* images.
+
+### Redis
+
+Similar to *RabbitMQ*, the *Redis* database was set up by adding a service in the `docker-compose.yaml` file using an existing image.
+
 ## Quick start
 
-So you don't want to read all our README, you meanie ~ 
-
-<img src="https://media.tenor.com/GF3gAxfRPOsAAAAM/anime-girl-meh.gif" style="width:50%;">
-
-Well, that's okay~ You don't want to lose some precious time after all, uwu
+>So you don't want to read all our README, you meanie ~ 
+>
+><img src="https://media.tenor.com/GF3gAxfRPOsAAAAM/anime-girl-meh.gif" style="width:50%;">
+>
+>Well, that's okay~ You don't want to lose some precious time after all, uwu
 
 To start our app localy in dev mode, you only need to run
 
