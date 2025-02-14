@@ -33,8 +33,8 @@
 ## Sommaire
 
 * [Fondation](foundation/README.md)
-* [Kubernetes](application/README.md)
-* [Application](kubernetes/README.md)
+* [Kubernetes](kubernetes/README.md)
+* [Application](application/README.md)
 
 ## Développement des services
 
